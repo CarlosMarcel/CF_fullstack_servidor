@@ -105,6 +105,12 @@ function login(datos, res) {
     });
 }
 
+//Funcion comentada del tutorial
+    app.use(expressjwt({secret:'secreto'})
+   .unless({path:[
+      '/auth/login'
+   ]}));
+
 //Establecimiento de Rutas
     app.get("/", function (req, res) {
         res.writeHead(200, {'Content-Type': 'text/plain'});
