@@ -107,7 +107,8 @@ function login(datos, res) {
 
 //Establecimiento de Rutas
     app.get("/", function (req, res) {
-        seleccionar(req, res);
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end('Servidor Node Funcionado correctamente :)');
         console.log('APP FUNCIONANDO');
     });
     
