@@ -92,7 +92,7 @@ function login(datos, res) {
             var token = jwt.sign({
                 user: datos.user,
                 rol: 'admin'
-            },'secreto',{expiresIn: '120s'});
+            },'secreto',{expiresIn: '1d'});
             res.send(token);
           }
         }
