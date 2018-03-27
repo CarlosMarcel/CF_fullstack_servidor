@@ -132,6 +132,60 @@ function insertar(datos, res) {
     });
 }
 
+//Funcion de actualizar
+function actualizar(datos, res) {
+
+    pool.getConnection(function (err, connection) {
+      if (err) {
+        res.json({ "code": 100, "status": "Error in connection database" });
+        return;
+      }
+  
+      console.log('connected as id ' + connection.threadId);
+  
+      connection.query("update inventario set ? where id = ?",[datos,datos.id],function (err, rows) {
+        connection.release();
+        if (!err) {
+            res.send({estado: 'OK'});
+        }else{
+            res.send({estado: 'Error'});
+        }
+      });
+  
+      connection.on('error', function (err) {
+        res.json({ "code": 100, "status": "Error in connection database" });
+        return;
+      });
+    });
+}
+
+//Funcion de borrar
+function borrar(id, res) {
+
+    pool.getConnection(function (err, connection) {
+      if (err) {
+        res.json({ "code": 100, "status": "Error in connection database" });
+        return;
+      }
+  
+      console.log('connected as id ' + connection.threadId);
+  
+      connection.query("delete from inventario where id = ?", id,function (err, rows) {
+        connection.release();
+        if (!err) {
+            res.send({estado: 'OK'});
+        }else{
+            res.send({estado: 'Error'});
+        }
+      });
+  
+      connection.on('error', function (err) {
+        res.json({ "code": 100, "status": "Error in connection database" });
+        return;
+      });
+    });
+}
+
 //Funcion comentada del tutorial
     /*app.use(expressjwt({secret:'secreto'})
    .unless({path:[
@@ -163,6 +217,14 @@ function insertar(datos, res) {
 
     app.post('/inventario/',function(req, res){
         insertar(req.body, res);
+    })
+
+    app.put('/inventario/', function(req, res){
+        db.actualizar(req.body, res);
+    })
+
+    app.delete('/inventario/:id/',function(req, res){
+        db.borrar(req.params.id, res);
     })
 
 //Inicio de la App
