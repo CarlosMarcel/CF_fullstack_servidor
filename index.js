@@ -105,6 +105,33 @@ function login(datos, res) {
     });
 }
 
+//Funcion de insertar
+function insertar(datos, res) {
+
+    pool.getConnection(function (err, connection) {
+      if (err) {
+        res.json({ "code": 100, "status": "Error in connection database" });
+        return;
+      }
+  
+      console.log('connected as id ' + connection.threadId);
+  
+      connection.query("insert into inventario set ?",datos,function (err, rows) {
+        connection.release();
+        if (!err) {
+            res.send({estado: 'OK'});
+        }else{
+            res.send({estado: 'Error'});
+        }
+      });
+  
+      connection.on('error', function (err) {
+        res.json({ "code": 100, "status": "Error in connection database" });
+        return;
+      });
+    });
+}
+
 //Funcion comentada del tutorial
     /*app.use(expressjwt({secret:'secreto'})
    .unless({path:[
@@ -132,6 +159,10 @@ function login(datos, res) {
     app.post('/auth/login/', function (req, res) {
         login(req.body, res);
         console.log('Login!');
+    })
+
+    app.post('/inventario/',function(req, res){
+        insertar(req.body, res);
     })
 
 //Inicio de la App
