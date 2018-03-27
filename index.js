@@ -220,11 +220,11 @@ function borrar(id, res) {
     })
 
     app.put('/inventario/', function(req, res){
-        db.actualizar(req.body, res);
+        actualizar(req.body, res);
     })
 
     app.delete('/inventario/:id/',function(req, res){
-        db.borrar(req.params.id, res);
+        borrar(req.params.id, res);
     })
 
 //Inicio de la App
