@@ -1,4 +1,4 @@
-//Imports
+//Imports para el funcionamiento del API
 var express = require('express');
 var bodyparser = require('body-parser');
 var cors = require('cors');
