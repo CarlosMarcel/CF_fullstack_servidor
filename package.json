@@ -1,7 +1,7 @@
 {
   "name": "servidor-full-stack",
   "version": "1.0.0",
-  "description": "Este es un servidor con Node y MySQL",
+  "description": "Este es un servidor con NodeJs y MySQL",
   "engines": {
     "node": "9.6.1"
   },
